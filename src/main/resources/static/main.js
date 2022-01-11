@@ -73,7 +73,8 @@ function getRole(address) {
     return data;
 }
 
-document.querySelector('#addNewUserButton').addEventListener('click', () => {
+document.querySelector('#addNewUserButton').addEventListener('click', (event) => {
+    event.preventDefault();
     let newUser = {
         id: $('#newId').val(),
         username: $('#usernameN').val(),
@@ -117,8 +118,8 @@ function editUser(id) {
     })
 }
 
-document.querySelector('#editButton').addEventListener('click', () => {
-
+document.querySelector('#editButton').addEventListener('click', (event) => {
+    event.preventDefault();
     let editUser = {
         id: $('#editId').val(),
         username: $('#editFirstName').val(),
