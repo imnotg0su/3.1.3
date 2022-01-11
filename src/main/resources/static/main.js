@@ -35,6 +35,7 @@ function usersTable(user) {
     )
 }
 
+
 function deleteCurrentUser(id) {
 
     fetch(usersURL + id, {method: "DELETE"})
@@ -64,15 +65,23 @@ document.querySelector('#new-tab').addEventListener('shown.bs.tab', () => {
         })
 })
 
+function getRole(address) {
+    let data = [];
+    $(address).find("option:selected").each(function () {
+        data.push({roles: $(this).attr("name"), authority: $(this).attr("name")})
+    });
+    return data;
+}
+
 document.querySelector('#addNewUserButton').addEventListener('click', () => {
-    const newUser = {
-        id: parseInt($('#newId').val()),
+    let newUser = {
+        id: $('#newId').val(),
         username: $('#usernameN').val(),
         surname: $('#surnameN').val(),
         age: $('#ageN').val(),
         email: $('#emailN').val(),
         password: $('#passwordN').val(),
-        role: $('#addRole').val()
+        role: getRole('#addRole')
     }
 
     fetch(usersURL, {
@@ -111,7 +120,7 @@ function editUser(id) {
 document.querySelector('#editButton').addEventListener('click', () => {
 
     let editUser = {
-        id: parseInt($('#editId').val()),
+        id: $('#editId').val(),
         username: $('#editFirstName').val(),
         surname: $('#editLastName').val(),
         age: $('#editAge').val(),
