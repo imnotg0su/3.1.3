@@ -126,7 +126,7 @@ document.querySelector('#editButton').addEventListener('click', () => {
         age: $('#editAge').val(),
         email: $('#editEmail').val(),
         password: $('#editPassword').val(),
-        role: $('#editRole').val()
+        role: getRole('#editRole')
     }
 
     fetch(usersURL, {
