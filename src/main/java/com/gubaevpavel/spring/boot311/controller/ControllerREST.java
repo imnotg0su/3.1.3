@@ -46,7 +46,7 @@ public class ControllerREST {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/users")
+    @PatchMapping("/users")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);

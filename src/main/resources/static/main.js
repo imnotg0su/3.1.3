@@ -45,33 +45,33 @@ function deleteCurrentUser(id) {
         })
 }
 
+function arrOfRoles(arr) {
+    let roles = [];
+
+    if (arr.indexOf("ROLE_ADMIN") >= 0) {
+        roles.push({'id': 1, 'name': 'ROLE_ADMIN', 'authority' : 'ROLE_ADMIN'});
+    }
+
+    if (arr.indexOf("ROLE_USER") >= 0) {
+        roles.push({'id': 2, 'name': 'ROLE_USER', 'authority' : 'ROLE_USER'});
+    }
+
+    return roles;
+}
+
 document.querySelector('#new-tab').addEventListener('shown.bs.tab', () => {
-    fetch(rolesURL).then(res => {
-        res.json().then(newUser => {
+
             document.getElementById('usernameN')
             document.getElementById('surnameN')
             document.getElementById('ageN')
             document.getElementById('emailN')
             document.getElementById('passwordN')
-            $.each(newUser, function (k, role) {
-                $('#addRole').append(
-                    $('<option>').text(role.name)
-                )
-            })
-        })
-    })
+
         .then(() => {
             document.getElementById("addNewUserForm").reset();
         })
 })
 
-function getRole(address) {
-    let data = [];
-    $(address).find("option:selected").each(function () {
-        data.push({roles: $(this).attr("name"), authority: $(this).attr("name")})
-    });
-    return data;
-}
 
 document.querySelector('#addNewUserButton').addEventListener('click', (event) => {
     event.preventDefault();
@@ -82,7 +82,8 @@ document.querySelector('#addNewUserButton').addEventListener('click', (event) =>
         age: $('#ageN').val(),
         email: $('#emailN').val(),
         password: $('#passwordN').val(),
-        role: getRole('#addRole')
+        role: arrOfRoles(Array.from(document.getElementById('addRole').selectedOptions)
+            .map(role => role.value))
     }
 
     fetch(usersURL, {
@@ -107,15 +108,6 @@ function editUser(id) {
                 $('#editEmail').val(user.email)
             })
         })
-    fetch(rolesURL).then(res => {
-        res.json().then(user => {
-            $.each(user, function (k, role) {
-                $('#editRole').append(
-                    $('<option>').text(role.name)
-                )
-            })
-        })
-    })
 }
 
 document.querySelector('#editButton').addEventListener('click', (event) => {
@@ -127,11 +119,12 @@ document.querySelector('#editButton').addEventListener('click', (event) => {
         age: $('#editAge').val(),
         email: $('#editEmail').val(),
         password: $('#editPassword').val(),
-        role: getRole('#editRole')
+        role: arrOfRoles(Array.from(document.getElementById('editRole').selectedOptions)
+            .map(role => role.value))
     }
 
     fetch(usersURL, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'

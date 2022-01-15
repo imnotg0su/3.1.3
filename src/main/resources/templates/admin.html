@@ -115,6 +115,9 @@
                                                             <label for="editRole">Role</label>
                                                             <select multiple class="form-select w-100"
                                                                     id="editRole" name="editRoles">
+                                                                <option th:each="role : ${roles}"
+                                                                        th:text="${role.getName()}">
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </form>
@@ -151,7 +154,8 @@
                                     <h7>Role</h7>
                                     <select class="form-select" multiple size="" id="addRole"
                                             name="addRole" required>
-
+                                        <option th:each="role : ${roles}" th:value="${role.getId()}" th:text="${role.getName()}">
+                                        </option>
                                     </select>
                                     <button type="submit" id="addNewUserButton" class="btn btn-success" >Add new user
                                     </button>
