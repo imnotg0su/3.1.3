@@ -49,28 +49,15 @@ function arrOfRoles(arr) {
     let roles = [];
 
     if (arr.indexOf("ROLE_ADMIN") >= 0) {
-        roles.push({'id': 1, 'name': 'ROLE_ADMIN', 'authority' : 'ROLE_ADMIN'});
+        roles.push({"id": 1, "name": "ROLE_ADMIN", "authority" : "ROLE_ADMIN"});
     }
 
     if (arr.indexOf("ROLE_USER") >= 0) {
-        roles.push({'id': 2, 'name': 'ROLE_USER', 'authority' : 'ROLE_USER'});
+        roles.push({"id": 2, "name": "ROLE_USER", "authority" : "ROLE_USER"});
     }
 
     return roles;
 }
-
-document.querySelector('#new-tab').addEventListener('shown.bs.tab', () => {
-
-            document.getElementById('usernameN')
-            document.getElementById('surnameN')
-            document.getElementById('ageN')
-            document.getElementById('emailN')
-            document.getElementById('passwordN')
-
-        .then(() => {
-            document.getElementById("addNewUserForm").reset();
-        })
-})
 
 
 document.querySelector('#addNewUserButton').addEventListener('click', (event) => {
@@ -82,7 +69,7 @@ document.querySelector('#addNewUserButton').addEventListener('click', (event) =>
         age: $('#ageN').val(),
         email: $('#emailN').val(),
         password: $('#passwordN').val(),
-        role: arrOfRoles(Array.from(document.getElementById('addRole').selectedOptions)
+        roles: arrOfRoles(Array.from(document.getElementById('addRole').selectedOptions)
             .map(role => role.value))
     }
 
@@ -119,7 +106,7 @@ document.querySelector('#editButton').addEventListener('click', (event) => {
         age: $('#editAge').val(),
         email: $('#editEmail').val(),
         password: $('#editPassword').val(),
-        role: arrOfRoles(Array.from(document.getElementById('editRole').selectedOptions)
+        roles: arrOfRoles(Array.from(document.getElementById('editRole').selectedOptions)
             .map(role => role.value))
     }
 
