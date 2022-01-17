@@ -28,22 +28,22 @@ public class ControllerREST {
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAllUsers () {
         List<User> users = userService.allUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.FOUND);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> showUserById(@PathVariable int id) {
         User user = userService.userById(id);
         if (user == null) {
-            throw new NoSuchUserException("There is no user with ID = " + id + "in Database.");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         userService.saveUser(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PatchMapping("/users")
@@ -61,7 +61,7 @@ public class ControllerREST {
     @GetMapping("/users/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
         List<Role> roles = roleService.allRoles();
-        return new ResponseEntity<>(roles, HttpStatus.OK);
+        return new ResponseEntity<>(roles, HttpStatus.FOUND);
     }
 }
 

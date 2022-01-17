@@ -1,12 +1,11 @@
 package com.gubaevpavel.spring.boot311.service;
 
-import com.gubaevpavel.spring.boot311.dao.RoleRepository;
+import com.gubaevpavel.spring.boot311.repository.RoleRepository;
 import com.gubaevpavel.spring.boot311.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -21,6 +20,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    @Transactional (readOnly = true)
     public List<Role> allRoles() {
         return roleRepository.findAll();
     }
@@ -46,11 +46,13 @@ public class RoleServiceImpl implements RoleService{
 //    }
 
     @Override
+    @Transactional (readOnly = true)
     public Role getRoleById(int id) {
         return roleRepository.findById(id).get();
     }
 
     @Override
+    @Transactional (readOnly = true)
     public Role getRoleByName(String name) {
         return roleRepository.findRoleByName(name);
     }

@@ -18,19 +18,18 @@ function getAllUsers() {
 }
 function usersTable(user) {
     userInfo.append(
-        '<tr>' + '<td>' + user.id + '</td>' +
-                 '<td>' + user.username + '</td>' +
-                 '<td>' + user.surname + '</td>' +
-                 '<td>' + user.age + '</td>' +
-                 '<td>' + user.email + '</td>' +
-                 '<td>' + user.roles.map(roles => roles.name) + '</td>' +
-                 '<td>' +
-                 '<button onclick="editUser(' + user.id + ')" class="btn btn-info edit-btn" data-bs-toggle="modal" data-bs-target="#editModal"' +
-                 '>Edit</button></td>' +
-                 '<td>' +
-                 '<button onclick="deleteCurrentUser(' + user.id + ')" class="btn btn-danger" ' +
-                 '>Delete</button></td>' +
-        '</tr>'
+        `<tr> 
+                 <td> ${user.id} </td> 
+                 <td> ${user.username} </td> 
+                 <td> ${user.surname} </td> 
+                 <td> ${user.age} </td> 
+                 <td> ${user.email} </td> 
+                 <td> ${user.roles.map(roles => roles.name)} </td> 
+                 <td> 
+                 <button onclick="editUser(${user.id})" class="btn btn-info edit-btn" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button></td>
+                 <td> 
+                 <button onclick="deleteCurrentUser(${user.id})" class="btn btn-danger">Delete</button></td>
+        </tr>`
     )
 }
 

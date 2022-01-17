@@ -1,4 +1,4 @@
-package com.gubaevpavel.spring.boot311.dao;
+package com.gubaevpavel.spring.boot311.repository;
 
 
 

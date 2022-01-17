@@ -1,15 +1,17 @@
 package com.gubaevpavel.spring.boot311.service;
 
 
-import com.gubaevpavel.spring.boot311.dao.UserRepository;
+import com.gubaevpavel.spring.boot311.repository.UserRepository;
 import com.gubaevpavel.spring.boot311.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional (readOnly = true)
     public List<User> allUsers() {
         return userRepository.findAll();
     }
@@ -46,11 +49,13 @@ public class UserServiceImpl implements UserService{
 //    }
 
     @Override
+    @Transactional (readOnly = true)
     public User userById(int id) {
         return userRepository.findById(id).get();
     }
 
     @Override
+    @Transactional (readOnly = true)
     public User getUserByName(String username) {
         return userRepository.findUserByUsername(username);
     }
